@@ -16,6 +16,7 @@ from geometry_msgs.msg import PoseStamped, Twist
 from nav_msgs.msg import Odometry
 from cv_bridge import CvBridge, CvBridgeError
 from sensor_msgs import point_cloud2
+from tf.transformations import euler_from_quaternion
 
 try:
     from data_msgs.msg import Gripper
@@ -302,7 +303,6 @@ class DataCaptureNode:
             filepath = os.path.join(self.episode_dir, f"arm/endPose/{name}", filename)
             
             # Convert quaternion to euler angles
-            from tf.transformations import euler_from_quaternion
             orientation = [
                 msg.pose.orientation.x,
                 msg.pose.orientation.y,
@@ -342,7 +342,6 @@ class DataCaptureNode:
             filepath = os.path.join(self.episode_dir, f"localization/pose/{name}", filename)
             
             # Convert quaternion to euler angles
-            from tf.transformations import euler_from_quaternion
             orientation = [
                 msg.pose.orientation.x,
                 msg.pose.orientation.y,
@@ -462,6 +461,7 @@ class DataCaptureNode:
     def robot_base_vel_callback(self, msg, index):
         """Callback for robot base velocity"""
         try:
+            # Twist messages don't have headers, so use current time
             timestamp = rospy.Time.now().to_sec()
             
             # Save velocity data
@@ -503,6 +503,16 @@ def get_arguments():
                         help='Path to configuration YAML file')
     
     args = parser.parse_args()
+    
+    # Override with ROS parameters if available (for launch file compatibility)
+    if rospy.has_param('~dataset_dir'):
+        args.dataset_dir = rospy.get_param('~dataset_dir')
+    if rospy.has_param('~episode_index'):
+        args.episode_index = rospy.get_param('~episode_index')
+    if rospy.has_param('~type'):
+        args.type = rospy.get_param('~type')
+    if rospy.has_param('~config_path'):
+        args.config_path = rospy.get_param('~config_path')
     
     # Load configuration from YAML
     if not args.config_path:
