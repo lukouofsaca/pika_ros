@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import os
-import time
 import json
 import cv2
 import numpy as np
@@ -10,12 +9,9 @@ import argparse
 import yaml
 
 import rospy
-from std_msgs.msg import Header
 from sensor_msgs.msg import JointState, Image, PointCloud2, Imu
 from geometry_msgs.msg import PoseStamped, Twist
-from nav_msgs.msg import Odometry
 from cv_bridge import CvBridge, CvBridgeError
-from sensor_msgs import point_cloud2
 from tf.transformations import euler_from_quaternion
 
 try:
@@ -44,18 +40,6 @@ class DataCaptureNode:
         
         # Initialize subscribers
         self.init_subscribers()
-        
-        # Data buffers
-        self.camera_color_buffers = [[] for _ in self.args.camera_color_names]
-        self.camera_depth_buffers = [[] for _ in self.args.camera_depth_names]
-        self.camera_point_cloud_buffers = [[] for _ in self.args.camera_point_cloud_names]
-        self.arm_joint_state_buffers = [[] for _ in self.args.arm_joint_state_names]
-        self.arm_end_pose_buffers = [[] for _ in self.args.arm_end_pose_names]
-        self.localization_pose_buffers = [[] for _ in self.args.localization_pose_names]
-        self.gripper_encoder_buffers = [[] for _ in self.args.gripper_encoder_names]
-        self.imu_9axis_buffers = [[] for _ in self.args.imu_9axis_names]
-        self.lidar_point_cloud_buffers = [[] for _ in self.args.lidar_point_cloud_names]
-        self.robot_base_vel_buffers = [[] for _ in self.args.robot_base_vel_names]
         
         rospy.loginfo("Data capture node initialized for episode %d", self.episode_index)
         rospy.loginfo("Data will be saved to: %s", self.episode_dir)
@@ -543,7 +527,6 @@ def get_arguments():
     args.arm_joint_state_topics = yaml_data['dataInfo']['arm']['jointState']['topics']
     args.arm_end_pose_names = yaml_data['dataInfo']['arm']['endPose']['names']
     args.arm_end_pose_topics = yaml_data['dataInfo']['arm']['endPose']['topics']
-    args.arm_end_pose_orients = yaml_data['dataInfo']['arm']['endPose']['orients']
     args.localization_pose_names = yaml_data['dataInfo']['localization']['pose']['names']
     args.localization_pose_topics = yaml_data['dataInfo']['localization']['pose']['topics']
     args.gripper_encoder_names = yaml_data['dataInfo']['gripper']['encoder']['names']
