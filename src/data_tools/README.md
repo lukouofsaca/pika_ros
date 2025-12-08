@@ -43,6 +43,16 @@ dataInfo:
 
 To capture data from the image_top camera, ensure your camera node publishes to the `/camera/color/image_top/image_raw` topic.
 
+### Example: Publishing from OpenCV Camera
+
+An example script is provided to demonstrate publishing images from an OpenCV camera to the image_top topic:
+
+```bash
+rosrun data_tools example_image_publisher.py
+```
+
+This script captures images from the default camera (device 0) and publishes them to `/camera/color/image_top/image_raw` at 30 Hz.
+
 ### Data Structure
 
 Captured data is organized in the following structure:
@@ -102,9 +112,36 @@ The data capture node subscribes to the following topics (configurable via YAML)
 - `/localization/pose/*` - Localization poses
 - `/imu/9axis/*` - IMU data
 
+## Complete Usage Example
+
+Here's a complete workflow for capturing data with the image_top camera:
+
+1. **Start the example image publisher** (in terminal 1):
+   ```bash
+   rosrun data_tools example_image_publisher.py
+   ```
+
+2. **Start the data capture node** (in terminal 2):
+   ```bash
+   roslaunch data_tools run_data_capture.launch dataset_dir:=/home/agilex/data episode_index:=0
+   ```
+
+3. **Perform your robotic task** while the data is being captured.
+
+4. **Stop both nodes** when done (Ctrl+C).
+
+5. **Convert captured data to HDF5**:
+   ```bash
+   cd /home/runner/work/pika_ros/pika_ros/scripts
+   python data_to_hdf5.py --datasetDir /home/agilex/data --episodeIndex 0 --type aloha
+   ```
+
+The captured data will be saved in `/home/agilex/data/episode0/camera/color/image_top/` and included in the generated HDF5 file.
+
 ## Notes
 
 - The image_top interface accepts standard ROS Image messages
 - Images are saved as PNG files with timestamps
 - Configuration includes camera intrinsics and extrinsics (to be calibrated)
 - All data is timestamped and synchronized via sync.txt files
+- The image_top camera can come from any source (USB camera, network camera, simulation, etc.) as long as it publishes ROS Image messages

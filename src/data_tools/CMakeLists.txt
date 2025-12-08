@@ -21,6 +21,7 @@ include_directories(
 
 install(PROGRAMS
   scripts/data_capture_node.py
+  scripts/example_image_publisher.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
