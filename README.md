@@ -40,3 +40,8 @@ pika 遥操作：https://github.com/agilexrobotics/PikaAnyArm
 - ROS：humble
 
 
+## 在源软件上的修改
+
+1. 所有的变量全部放到了conda环境里面：
+~/miniconda3/envs/pika_ros/etc/conda/activate.d/env_vars.sh
+
