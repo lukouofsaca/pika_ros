@@ -5,3 +5,4 @@ img/
 install/
 scripts/setup_mul*
 scripts/start_mul*
+Piper_sdk_ui/*
