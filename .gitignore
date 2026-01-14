@@ -1,0 +1,11 @@
+source/librealsense
+source/curl-7.75.0
+
+img/
+install/
+scripts/setup_mul*
+scripts/start_mul*
+Piper_sdk_ui/
+Piper_sdk_ui/*
+temp/
+opencv/
