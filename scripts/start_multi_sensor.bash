@@ -4,7 +4,7 @@ camera_fps=30
 camera_width=640
 camera_height=480
 l_depth_camera_no=315122272722
-r_depth_camera_no=315122271801
+r_depth_camera_no=315122271734
 
 l_serial_port=/dev/ttyUSB50
 r_serial_port=/dev/ttyUSB51
