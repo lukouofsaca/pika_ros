@@ -1,0 +1,32 @@
+/**:
+  ros__parameters:
+    dataInfo:
+
+      camera:
+        color:
+          names: ['pikaGripperDepthCamera_l', 'pikaGripperDepthCamera_r', 'rsCamera']
+          parentFrames: ['gripper/camera_l_link', 'gripper/camera_r_link', 'gripper/rsCamera_link']
+          topics: ['/gripper/camera_l/color/image_raw', '/gripper/camera_r/color/image_raw', '/gripper/rsCamera/color/image_raw']
+          configTopics: ['/gripper/camera_l/color/camera_info', '/gripper/camera_r/color/camera_info', '/gripper/rsCamera/color/camera_info']
+        # pointCloud:
+        #   names: []
+        #   parentFrames: []
+        #   topics: []
+        #   configTopics: []
+        #   maxDistances: []
+        #   downSizes: []
+
+      arm:
+        jointState:
+          names: ['masterLeft', 'masterRight', 'puppetLeft', 'puppetRight']
+          topics: ['/joint_states_gripper_l', '/joint_states_gripper_r', '/joint_states_single_gripper_l', '/joint_states_single_gripper_r']
+
+      localization:
+        pose:
+          names: ['pika_l', 'pika_r']
+          topics: ['/pika_pose_l', '/pika_pose_r']
+
+      gripper:
+        encoder:
+          names: ['pikaSensor_l', 'pikaSensor_r', 'pikaGripper_l', 'pikaGripper_r']
+          topics: ['/sensor/gripper_l/data', '/sensor/gripper_r/data', '/gripper/gripper_l/data', '/gripper/gripper_r/data']

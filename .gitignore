@@ -5,11 +5,12 @@ img/
 install/
 scripts/setup_mul*
 scripts/start_mul*
-<<<<<<< HEAD
 Piper_sdk_ui/*
-=======
 Piper_sdk_ui/
 Piper_sdk_ui/*
 temp/
 opencv/
->>>>>>> 156f439 (sensor_tools fixed)
+
+
+build/
+log/
