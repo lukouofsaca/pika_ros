@@ -1,0 +1,38 @@
+# 遥操不稳定是由IMU+红外引起的，遥操是两个都用的
+
+/joint_states_gripper_l: 0 / 0(-nanhz)
+Check the frequency of /joint_states_gripper_l
+armJointState /joint_states_gripper_l not changing!!!
+/joint_states_gripper_r: 0 / 0(-nanhz)
+Check the frequency of /joint_states_gripper_r
+armJointState /joint_states_gripper_r not changing!!!
+/joint_states_single_gripper_l: 149 / 149(151.834hz)
+/joint_states_single_gripper_r: 147 / 304(141.981hz)
+/pika_pose_l: 100 / 177(83.7165hz)
+/pika_pose_r: 100 / 196(100.598hz)
+/sensor/gripper_l/data: 123 / 123(125.51hz)
+/sensor/gripper_r/data: 124 / 124(126.53hz)
+/gripper/gripper_l/data: 110 / 110(113.38hz)
+/gripper/gripper_r/data: 110 / 225(111.94hz)
+sum total frame: 1480
+
+config topic: total frame
+/gripper/camera_l/color/camera_info: 1
+/gripper/camera_r/color/camera_info: 1
+/gripper/rsCamera/color/camera_info: 1
+
+
+press ENTER to stop capture:
+[INFO] [1768468277.805151006] [data_capture]: Processing color image at cameraColorSaving:881 | index=1 | encoding=rgb8 | width=640 | height=480 | data_size=921600
+[ERROR] [1768468277.805776035] [data_capture]: OpenCV Exception in cameraColorSaving:897 | index=1
+Error: OpenCV(4.5.4) ./modules/imgproc/src/color.cpp:355: error: (-206:Bad flag (parameter or structure field)) Unknown/unsupported color conversion code in function 'cvtColor'
+
+Image encoding: rgb8
+Requested encoding: bgr8
+terminate called after throwing an instance of 'cv::Exception'
+  what():  OpenCV(4.5.4) ./modules/imgproc/src/color.cpp:355: error: (-206:Bad flag (parameter or structure field)) Unknown/unsupported color conversion code in function 'cvtColor'
+
+/home/zhbs/pika_ros/install/data_tools/lib/data_tools/data_tools_dataCapture: 第 1 行： 1477456 已中止               （核心已转储） $0 $@
+The program has exited, press enter to close the terminal...
+
+
